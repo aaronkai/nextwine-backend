@@ -5,7 +5,6 @@ import {
   withItemData,
 } from '@keystone-next/keystone/session';
 import { createAuth } from '@keystone-next/auth';
-
 import { lists } from './schema';
 
 let sessionSecret = process.env.SESSION_SECRET;
@@ -16,7 +15,7 @@ if (!sessionSecret) {
       'The SESSION_SECRET environment variable must be set in production'
     );
   } else {
-    sessionSecret = '-- DEV COOKIE SECRET; CHANGE ME --';
+    sessionSecret = 'This can be anything, anything in the world';
   }
 }
 
@@ -30,9 +29,16 @@ const auth = createAuth({
     fields: ['name', 'email', 'password'],
   },
 });
-
+console.log('here is the frontend url')
+console.log (process.env.FRONTEND_URL)
 export default auth.withAuth(
   config({
+    server: {
+      cors: {
+        origin: [process.env.FRONTEND_URL],
+        credentials: true,
+      },
+    },
     db: {
       adapter: 'prisma_postgresql',
       url: process.env.DATABASE_URL,
