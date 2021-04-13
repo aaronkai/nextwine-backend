@@ -7,6 +7,18 @@ import {
   select,
   integer,
 } from '@keystone-next/fields';
+import 'dotenv/config';
+import { cloudinaryImage } from '@keystone-next/cloudinary';
+
+// ToDo: add access controls
+// import { isSignedIn, permissions } from '../access';
+
+export const cloudinary = {
+  cloudName: process.env.CLOUDINARY_CLOUD_NAME,
+  apiKey: process.env.CLOUDINARY_KEY,
+  apiSecret: process.env.CLOUDINARY_SECRET,
+  folder: 'nextwine',
+};
 
 export const lists = createSchema({
   User: list({
@@ -22,7 +34,110 @@ export const lists = createSchema({
       wines: relationship({ ref: 'Wine.drinker', many: true }),
     },
   }),
-  // Post: list({
+
+  Wine: list({
+    ui: {
+      listView: {
+        initialColumns: ['name', 'consumptionDate'],
+      },
+    },
+    fields: {
+      name: text({ isRequired: true }),
+      region: text({ isRequired: true}),
+      notes: text({ isRequired: true}),
+      vintner: text({ isRequired: true}),
+      price: integer({isRequired: true}),
+      vintage: integer({isRequired:true}),
+      hue: select({
+        dataType: 'string',
+        options: [
+          { label: 'Red', value: 'red' },
+          { label: 'White', value: 'white' },
+          { label: 'Rose', value: 'rose' },          
+        ],
+        defaultValue: 'Red',
+        isRequired: true,
+        ui: { displayMode: 'segmented-control' },
+      }),
+      carbonation: select({
+        dataType: 'string',
+        options: [
+          { label: 'Still', value: 'still' },
+          { label: 'Sparkling', value: 'sparkling' },
+        ],
+        defaultValue: 'still',
+        isRequired: true,
+        ui: { displayMode: 'segmented-control' },
+      }),
+      // ! probably a bug in keystone, this is being passed by UI as string, not int
+      // rating: select({
+      //   dataType: 'integer',
+      //   options: [
+      //     { label: 'One Star', value: 1 },
+      //     { label: 'Two Stars', value: 2 },
+      //     { label: 'Three Stars', value: 3 },
+      //   ],
+      //   isRequired: true,
+      //   ui: { displayMode: 'segmented-control' },
+      // }),
+      rating: select({
+        dataType: 'string',
+        options: [
+          { label: 'One Star', value: '1' },
+          { label: 'Two Stars', value: '2' },
+          { label: 'Three Stars', value: '3' },
+        ],
+        isRequired: true,
+        ui: { displayMode: 'segmented-control' },
+      }),
+      consumptionDate: timestamp({isRequired:true}),
+      drinker: relationship({
+        ref: 'User.wines',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['name', 'email'],
+          inlineEdit: { fields: ['name', 'email'] },
+          linkToItem: true,
+          inlineCreate: { fields: ['name', 'email'] },
+        },
+      }),
+      image: relationship({
+        ref: 'WineImage.wine',
+        ui: {
+          displayMode: 'cards',
+          cardFields: ['image', 'altText'],
+          inlineCreate: { fields: ['image', 'altText'] },
+          inlineEdit: { fields: ['image', 'altText'] },
+        },
+      })
+    },
+  }),
+
+
+  WineImage: list({
+    // access: {
+    //   create: isSignedIn,
+    //   read: () => true,
+    //   update: permissions.canManageProducts,
+    //   delete: permissions.canManageProducts,
+    // },
+    fields: {
+      image: cloudinaryImage({
+        cloudinary,
+        label: 'Source',
+      }),
+      altText: text(),
+      wine: relationship({ ref: 'Wine.image' }),
+    },
+    ui: {
+      listView: {
+        initialColumns: ['image', 'altText', 'wine'],
+      },
+    },
+  }),
+
+  // *This is just boilerplate to use as reference. Clean up later
+    // Post: list({
   //   fields: {
   //     title: text(),
   //     status: select({
@@ -83,33 +198,4 @@ export const lists = createSchema({
   //     }),
   //   },
   // }),
-  Wine: list({
-    ui: {
-      listView: {
-        initialColumns: ['name', 'posts'],
-      },
-    },
-    fields: {
-      name: text({ isRequired: true }),
-      region: text({ isRequired: true}),
-      notes: text({ isRequired: true}),
-      vintner: text({ isRequired: true}),
-      hue: text({ isRequired: true}),
-      carbonation: text({ isRequired: true}),
-      price: integer({isRequired: true}),
-      rating: integer({isRequired:true}),
-      vintage: integer({isRequired:true}),
-      consumptionDate: timestamp({isRequired:true}),
-      drinker: relationship({
-              ref: 'User.wines',
-              ui: {
-                displayMode: 'cards',
-                cardFields: ['name', 'email'],
-                inlineEdit: { fields: ['name', 'email'] },
-                linkToItem: true,
-                inlineCreate: { fields: ['name', 'email'] },
-              },
-            }),
-    },
-  }),
 });
