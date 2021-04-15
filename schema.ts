@@ -31,7 +31,7 @@ export const lists = createSchema({
       name: text({ isRequired: true }),
       email: text({ isRequired: true, isUnique: true }),
       password: password(),
-      wines: relationship({ ref: 'Wine.drinker', many: true }),
+      wines: relationship({ ref: 'Wine.user', many: true }),
     },
   }),
 
@@ -48,6 +48,7 @@ export const lists = createSchema({
       vintner: text({ isRequired: true}),
       price: integer({isRequired: true}),
       vintage: integer({isRequired:true}),
+      rating: integer({isRequired:true}),
       hue: select({
         dataType: 'string',
         options: [
@@ -80,26 +81,31 @@ export const lists = createSchema({
       //   isRequired: true,
       //   ui: { displayMode: 'segmented-control' },
       // }),
-      rating: select({
-        dataType: 'string',
-        options: [
-          { label: 'One Star', value: '1' },
-          { label: 'Two Stars', value: '2' },
-          { label: 'Three Stars', value: '3' },
-        ],
-        isRequired: true,
-        ui: { displayMode: 'segmented-control' },
-      }),
+      // rating: select({
+      //   dataType: 'string',
+      //   options: [
+      //     { label: 'One Star', value: '1' },
+      //     { label: 'Two Stars', value: '2' },
+      //     { label: 'Three Stars', value: '3' },
+      //   ],
+      //   isRequired: true,
+      //   ui: { displayMode: 'segmented-control' },
+      // }),
       consumptionDate: timestamp({isRequired:true}),
-      drinker: relationship({
+      user: relationship({
         ref: 'User.wines',
-        ui: {
-          displayMode: 'cards',
-          cardFields: ['name', 'email'],
-          inlineEdit: { fields: ['name', 'email'] },
-          linkToItem: true,
-          inlineCreate: { fields: ['name', 'email'] },
-        },
+        many: false,
+        defaultValue: ({ context }) => ({
+          connect: { id: context.session.itemId},
+        })
+
+        // ui: {
+        //   displayMode: 'cards',
+        //   cardFields: ['name', 'email'],
+        //   inlineEdit: { fields: ['name', 'email'] },
+        //   linkToItem: true,
+        //   inlineCreate: { fields: ['name', 'email'] },
+        // },
       }),
       image: relationship({
         ref: 'WineImage.wine',

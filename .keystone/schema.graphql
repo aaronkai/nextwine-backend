@@ -135,11 +135,11 @@ type Wine {
   vintner: String
   price: Int
   vintage: Int
+  rating: Int
   hue: String
   carbonation: String
-  rating: String
   consumptionDate: String
-  drinker: User
+  user: User
   image: WineImage
 }
 
@@ -242,6 +242,14 @@ input WineWhereInput {
   vintage_gte: Int
   vintage_in: [Int]
   vintage_not_in: [Int]
+  rating: Int
+  rating_not: Int
+  rating_lt: Int
+  rating_lte: Int
+  rating_gt: Int
+  rating_gte: Int
+  rating_in: [Int]
+  rating_not_in: [Int]
   hue: String
   hue_not: String
   hue_in: [String]
@@ -250,10 +258,6 @@ input WineWhereInput {
   carbonation_not: String
   carbonation_in: [String]
   carbonation_not_in: [String]
-  rating: String
-  rating_not: String
-  rating_in: [String]
-  rating_not_in: [String]
   consumptionDate: String
   consumptionDate_not: String
   consumptionDate_lt: String
@@ -262,8 +266,8 @@ input WineWhereInput {
   consumptionDate_gte: String
   consumptionDate_in: [String]
   consumptionDate_not_in: [String]
-  drinker: UserWhereInput
-  drinker_is_null: Boolean
+  user: UserWhereInput
+  user_is_null: Boolean
   image: WineImageWhereInput
   image_is_null: Boolean
 }
@@ -287,16 +291,16 @@ enum SortWinesBy {
   price_DESC
   vintage_ASC
   vintage_DESC
+  rating_ASC
+  rating_DESC
   hue_ASC
   hue_DESC
   carbonation_ASC
   carbonation_DESC
-  rating_ASC
-  rating_DESC
   consumptionDate_ASC
   consumptionDate_DESC
-  drinker_ASC
-  drinker_DESC
+  user_ASC
+  user_DESC
   image_ASC
   image_DESC
 }
@@ -308,11 +312,11 @@ input WineUpdateInput {
   vintner: String
   price: Int
   vintage: Int
+  rating: Int
   hue: String
   carbonation: String
-  rating: String
   consumptionDate: String
-  drinker: UserRelateToOneInput
+  user: UserRelateToOneInput
   image: WineImageRelateToOneInput
 }
 
@@ -328,11 +332,11 @@ input WineCreateInput {
   vintner: String
   price: Int
   vintage: Int
+  rating: Int
   hue: String
   carbonation: String
-  rating: String
   consumptionDate: String
-  drinker: UserRelateToOneInput
+  user: UserRelateToOneInput
   image: WineImageRelateToOneInput
 }
 

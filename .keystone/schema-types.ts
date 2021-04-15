@@ -217,6 +217,14 @@ export type WineWhereInput = {
   readonly vintage_gte?: Scalars['Int'] | null;
   readonly vintage_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly vintage_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly rating?: Scalars['Int'] | null;
+  readonly rating_not?: Scalars['Int'] | null;
+  readonly rating_lt?: Scalars['Int'] | null;
+  readonly rating_lte?: Scalars['Int'] | null;
+  readonly rating_gt?: Scalars['Int'] | null;
+  readonly rating_gte?: Scalars['Int'] | null;
+  readonly rating_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly rating_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly hue?: Scalars['String'] | null;
   readonly hue_not?: Scalars['String'] | null;
   readonly hue_in?: ReadonlyArray<Scalars['String'] | null> | null;
@@ -225,10 +233,6 @@ export type WineWhereInput = {
   readonly carbonation_not?: Scalars['String'] | null;
   readonly carbonation_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly carbonation_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
-  readonly rating?: Scalars['String'] | null;
-  readonly rating_not?: Scalars['String'] | null;
-  readonly rating_in?: ReadonlyArray<Scalars['String'] | null> | null;
-  readonly rating_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly consumptionDate?: Scalars['String'] | null;
   readonly consumptionDate_not?: Scalars['String'] | null;
   readonly consumptionDate_lt?: Scalars['String'] | null;
@@ -239,8 +243,8 @@ export type WineWhereInput = {
   readonly consumptionDate_not_in?: ReadonlyArray<
     Scalars['String'] | null
   > | null;
-  readonly drinker?: UserWhereInput | null;
-  readonly drinker_is_null?: Scalars['Boolean'] | null;
+  readonly user?: UserWhereInput | null;
+  readonly user_is_null?: Scalars['Boolean'] | null;
   readonly image?: WineImageWhereInput | null;
   readonly image_is_null?: Scalars['Boolean'] | null;
 };
@@ -264,16 +268,16 @@ export type SortWinesBy =
   | 'price_DESC'
   | 'vintage_ASC'
   | 'vintage_DESC'
+  | 'rating_ASC'
+  | 'rating_DESC'
   | 'hue_ASC'
   | 'hue_DESC'
   | 'carbonation_ASC'
   | 'carbonation_DESC'
-  | 'rating_ASC'
-  | 'rating_DESC'
   | 'consumptionDate_ASC'
   | 'consumptionDate_DESC'
-  | 'drinker_ASC'
-  | 'drinker_DESC'
+  | 'user_ASC'
+  | 'user_DESC'
   | 'image_ASC'
   | 'image_DESC';
 
@@ -284,11 +288,11 @@ export type WineUpdateInput = {
   readonly vintner?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
   readonly vintage?: Scalars['Int'] | null;
+  readonly rating?: Scalars['Int'] | null;
   readonly hue?: Scalars['String'] | null;
   readonly carbonation?: Scalars['String'] | null;
-  readonly rating?: Scalars['String'] | null;
   readonly consumptionDate?: Scalars['String'] | null;
-  readonly drinker?: UserRelateToOneInput | null;
+  readonly user?: UserRelateToOneInput | null;
   readonly image?: WineImageRelateToOneInput | null;
 };
 
@@ -304,11 +308,11 @@ export type WineCreateInput = {
   readonly vintner?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
   readonly vintage?: Scalars['Int'] | null;
+  readonly rating?: Scalars['Int'] | null;
   readonly hue?: Scalars['String'] | null;
   readonly carbonation?: Scalars['String'] | null;
-  readonly rating?: Scalars['String'] | null;
   readonly consumptionDate?: Scalars['String'] | null;
-  readonly drinker?: UserRelateToOneInput | null;
+  readonly user?: UserRelateToOneInput | null;
   readonly image?: WineImageRelateToOneInput | null;
 };
 
@@ -503,11 +507,11 @@ export type WineListTypeInfo = {
     | 'vintner'
     | 'price'
     | 'vintage'
+    | 'rating'
     | 'hue'
     | 'carbonation'
-    | 'rating'
     | 'consumptionDate'
-    | 'drinker'
+    | 'user'
     | 'image';
   backing: {
     readonly id: string;
@@ -517,11 +521,11 @@ export type WineListTypeInfo = {
     readonly vintner?: string | null;
     readonly price?: number | null;
     readonly vintage?: number | null;
+    readonly rating?: number | null;
     readonly hue?: string | null;
     readonly carbonation?: string | null;
-    readonly rating?: string | null;
     readonly consumptionDate?: Date | null;
-    readonly drinker?: string | null;
+    readonly user?: string | null;
     readonly image?: string | null;
   };
   inputs: {
