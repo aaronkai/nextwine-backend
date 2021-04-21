@@ -6,6 +6,8 @@ import {
   timestamp,
   select,
   integer,
+  decimal,
+  float,
 } from '@keystone-next/fields';
 import 'dotenv/config';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
@@ -49,6 +51,22 @@ export const lists = createSchema({
       price: integer({isRequired: true}),
       vintage: integer({isRequired:true}),
       rating: integer({isRequired:true}),
+      // geolocateX: decimal({ 
+      //   isRequired: false,
+      //   scale: 6,
+      //   precision: 10,
+      // }),     
+      // geolocateY: decimal({ 
+      //   isRequired: false,
+      //   scale: 6,
+      //   precision: 10,
+      // }),
+      geolocateX: float({ 
+        isRequired: false,
+      }),     
+      geolocateY: float({ 
+        isRequired: false,
+      }),
       hue: select({
         dataType: 'string',
         options: [

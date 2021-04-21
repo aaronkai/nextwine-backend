@@ -136,6 +136,8 @@ type Wine {
   price: Int
   vintage: Int
   rating: Int
+  geolocateX: Float
+  geolocateY: Float
   hue: String
   carbonation: String
   consumptionDate: String
@@ -250,6 +252,22 @@ input WineWhereInput {
   rating_gte: Int
   rating_in: [Int]
   rating_not_in: [Int]
+  geolocateX: Float
+  geolocateX_not: Float
+  geolocateX_lt: Float
+  geolocateX_lte: Float
+  geolocateX_gt: Float
+  geolocateX_gte: Float
+  geolocateX_in: [Float]
+  geolocateX_not_in: [Float]
+  geolocateY: Float
+  geolocateY_not: Float
+  geolocateY_lt: Float
+  geolocateY_lte: Float
+  geolocateY_gt: Float
+  geolocateY_gte: Float
+  geolocateY_in: [Float]
+  geolocateY_not_in: [Float]
   hue: String
   hue_not: String
   hue_in: [String]
@@ -293,6 +311,10 @@ enum SortWinesBy {
   vintage_DESC
   rating_ASC
   rating_DESC
+  geolocateX_ASC
+  geolocateX_DESC
+  geolocateY_ASC
+  geolocateY_DESC
   hue_ASC
   hue_DESC
   carbonation_ASC
@@ -313,6 +335,8 @@ input WineUpdateInput {
   price: Int
   vintage: Int
   rating: Int
+  geolocateX: Float
+  geolocateY: Float
   hue: String
   carbonation: String
   consumptionDate: String
@@ -333,6 +357,8 @@ input WineCreateInput {
   price: Int
   vintage: Int
   rating: Int
+  geolocateX: Float
+  geolocateY: Float
   hue: String
   carbonation: String
   consumptionDate: String

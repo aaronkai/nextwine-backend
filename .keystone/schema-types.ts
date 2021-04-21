@@ -225,6 +225,22 @@ export type WineWhereInput = {
   readonly rating_gte?: Scalars['Int'] | null;
   readonly rating_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly rating_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly geolocateX?: Scalars['Float'] | null;
+  readonly geolocateX_not?: Scalars['Float'] | null;
+  readonly geolocateX_lt?: Scalars['Float'] | null;
+  readonly geolocateX_lte?: Scalars['Float'] | null;
+  readonly geolocateX_gt?: Scalars['Float'] | null;
+  readonly geolocateX_gte?: Scalars['Float'] | null;
+  readonly geolocateX_in?: ReadonlyArray<Scalars['Float'] | null> | null;
+  readonly geolocateX_not_in?: ReadonlyArray<Scalars['Float'] | null> | null;
+  readonly geolocateY?: Scalars['Float'] | null;
+  readonly geolocateY_not?: Scalars['Float'] | null;
+  readonly geolocateY_lt?: Scalars['Float'] | null;
+  readonly geolocateY_lte?: Scalars['Float'] | null;
+  readonly geolocateY_gt?: Scalars['Float'] | null;
+  readonly geolocateY_gte?: Scalars['Float'] | null;
+  readonly geolocateY_in?: ReadonlyArray<Scalars['Float'] | null> | null;
+  readonly geolocateY_not_in?: ReadonlyArray<Scalars['Float'] | null> | null;
   readonly hue?: Scalars['String'] | null;
   readonly hue_not?: Scalars['String'] | null;
   readonly hue_in?: ReadonlyArray<Scalars['String'] | null> | null;
@@ -270,6 +286,10 @@ export type SortWinesBy =
   | 'vintage_DESC'
   | 'rating_ASC'
   | 'rating_DESC'
+  | 'geolocateX_ASC'
+  | 'geolocateX_DESC'
+  | 'geolocateY_ASC'
+  | 'geolocateY_DESC'
   | 'hue_ASC'
   | 'hue_DESC'
   | 'carbonation_ASC'
@@ -289,6 +309,8 @@ export type WineUpdateInput = {
   readonly price?: Scalars['Int'] | null;
   readonly vintage?: Scalars['Int'] | null;
   readonly rating?: Scalars['Int'] | null;
+  readonly geolocateX?: Scalars['Float'] | null;
+  readonly geolocateY?: Scalars['Float'] | null;
   readonly hue?: Scalars['String'] | null;
   readonly carbonation?: Scalars['String'] | null;
   readonly consumptionDate?: Scalars['String'] | null;
@@ -309,6 +331,8 @@ export type WineCreateInput = {
   readonly price?: Scalars['Int'] | null;
   readonly vintage?: Scalars['Int'] | null;
   readonly rating?: Scalars['Int'] | null;
+  readonly geolocateX?: Scalars['Float'] | null;
+  readonly geolocateY?: Scalars['Float'] | null;
   readonly hue?: Scalars['String'] | null;
   readonly carbonation?: Scalars['String'] | null;
   readonly consumptionDate?: Scalars['String'] | null;
@@ -508,6 +532,8 @@ export type WineListTypeInfo = {
     | 'price'
     | 'vintage'
     | 'rating'
+    | 'geolocateX'
+    | 'geolocateY'
     | 'hue'
     | 'carbonation'
     | 'consumptionDate'
@@ -522,6 +548,8 @@ export type WineListTypeInfo = {
     readonly price?: number | null;
     readonly vintage?: number | null;
     readonly rating?: number | null;
+    readonly geolocateX?: number | null;
+    readonly geolocateY?: number | null;
     readonly hue?: string | null;
     readonly carbonation?: string | null;
     readonly consumptionDate?: Date | null;
