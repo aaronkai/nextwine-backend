@@ -29,8 +29,6 @@ const auth = createAuth({
     fields: ['name', 'email', 'password'],
   },
 });
-console.log('here is the frontend url')
-console.log (process.env.FRONTEND_URL)
 export default auth.withAuth(
   config({
     server: {
@@ -40,8 +38,17 @@ export default auth.withAuth(
       },
     },
     db: {
-      adapter: 'prisma_postgresql',
-      url: process.env.DATABASE_URL,
+      adapter: process.env.POSTGRES_ADAPTER,
+      url: process.env.POSTGRES_URL,
+      // adapter: process.env.MONGO_ADAPTER,
+      // url: process.env.MONGO_URL,
+      async onConnect(keystone){
+        console.log('Connected to the database')
+        if(process.argv.includes('--seed-data')) {
+          await insertSeedData(keystone);
+        }
+      }
+      
     },
     ui: {
       isAccessAllowed: (context) => !!context.session?.data,

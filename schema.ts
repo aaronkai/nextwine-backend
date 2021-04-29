@@ -51,16 +51,6 @@ export const lists = createSchema({
       price: integer({isRequired: true}),
       vintage: integer({isRequired:true}),
       rating: integer({isRequired:true}),
-      // geolocateX: decimal({ 
-      //   isRequired: false,
-      //   scale: 6,
-      //   precision: 10,
-      // }),     
-      // geolocateY: decimal({ 
-      //   isRequired: false,
-      //   scale: 6,
-      //   precision: 10,
-      // }),
       geolocateX: float({ 
         isRequired: false,
       }),     
@@ -88,27 +78,6 @@ export const lists = createSchema({
         isRequired: true,
         ui: { displayMode: 'segmented-control' },
       }),
-      // ! probably a bug in keystone, this is being passed by UI as string, not int
-      // rating: select({
-      //   dataType: 'integer',
-      //   options: [
-      //     { label: 'One Star', value: 1 },
-      //     { label: 'Two Stars', value: 2 },
-      //     { label: 'Three Stars', value: 3 },
-      //   ],
-      //   isRequired: true,
-      //   ui: { displayMode: 'segmented-control' },
-      // }),
-      // rating: select({
-      //   dataType: 'string',
-      //   options: [
-      //     { label: 'One Star', value: '1' },
-      //     { label: 'Two Stars', value: '2' },
-      //     { label: 'Three Stars', value: '3' },
-      //   ],
-      //   isRequired: true,
-      //   ui: { displayMode: 'segmented-control' },
-      // }),
       consumptionDate: timestamp({isRequired:true}),
       user: relationship({
         ref: 'User.wines',
@@ -116,14 +85,6 @@ export const lists = createSchema({
         defaultValue: ({ context }) => ({
           connect: { id: context.session.itemId},
         })
-
-        // ui: {
-        //   displayMode: 'cards',
-        //   cardFields: ['name', 'email'],
-        //   inlineEdit: { fields: ['name', 'email'] },
-        //   linkToItem: true,
-        //   inlineCreate: { fields: ['name', 'email'] },
-        // },
       }),
       image: relationship({
         ref: 'WineImage.wine',
@@ -159,67 +120,4 @@ export const lists = createSchema({
       },
     },
   }),
-
-  // *This is just boilerplate to use as reference. Clean up later
-    // Post: list({
-  //   fields: {
-  //     title: text(),
-  //     status: select({
-  //       options: [
-  //         { label: 'Published', value: 'published' },
-  //         { label: 'Draft', value: 'draft' },
-  //       ],
-  //       ui: {
-  //         displayMode: 'segmented-control',
-  //       },
-  //     }),
-  //     content: document({
-  //       formatting: true,
-  //       layouts: [
-  //         [1, 1],
-  //         [1, 1, 1],
-  //         [2, 1],
-  //         [1, 2],
-  //         [1, 2, 1],
-  //       ],
-  //       links: true,
-  //       dividers: true,
-  //     }),
-  //     publishDate: timestamp(),
-  //     author: relationship({
-  //       ref: 'User.posts',
-  //       ui: {
-  //         displayMode: 'cards',
-  //         cardFields: ['name', 'email'],
-  //         inlineEdit: { fields: ['name', 'email'] },
-  //         linkToItem: true,
-  //         inlineCreate: { fields: ['name', 'email'] },
-  //       },
-  //     }),
-  //     tags: relationship({
-  //       ref: 'Tag.posts',
-  //       ui: {
-  //         displayMode: 'cards',
-  //         cardFields: ['name'],
-  //         inlineEdit: { fields: ['name'] },
-  //         linkToItem: true,
-  //         inlineConnect: true,
-  //         inlineCreate: { fields: ['name'] },
-  //       },
-  //       many: true,
-  //     }),
-  //   },
-  // }),
-  // Tag: list({
-  //   ui: {
-  //     isHidden: true,
-  //   },
-  //   fields: {
-  //     name: text(),
-  //     posts: relationship({
-  //       ref: 'Post.tags',
-  //       many: true,
-  //     }),
-  //   },
-  // }),
 });
