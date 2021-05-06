@@ -217,6 +217,14 @@ export type WineWhereInput = {
   readonly vintage_gte?: Scalars['Int'] | null;
   readonly vintage_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly vintage_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly hue?: Scalars['String'] | null;
+  readonly hue_not?: Scalars['String'] | null;
+  readonly hue_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly hue_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly carbonation?: Scalars['String'] | null;
+  readonly carbonation_not?: Scalars['String'] | null;
+  readonly carbonation_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly carbonation_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly rating?: Scalars['Int'] | null;
   readonly rating_not?: Scalars['Int'] | null;
   readonly rating_lt?: Scalars['Int'] | null;
@@ -225,6 +233,78 @@ export type WineWhereInput = {
   readonly rating_gte?: Scalars['Int'] | null;
   readonly rating_in?: ReadonlyArray<Scalars['Int'] | null> | null;
   readonly rating_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly sweetness?: Scalars['Int'] | null;
+  readonly sweetness_not?: Scalars['Int'] | null;
+  readonly sweetness_lt?: Scalars['Int'] | null;
+  readonly sweetness_lte?: Scalars['Int'] | null;
+  readonly sweetness_gt?: Scalars['Int'] | null;
+  readonly sweetness_gte?: Scalars['Int'] | null;
+  readonly sweetness_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly sweetness_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly acidity?: Scalars['Int'] | null;
+  readonly acidity_not?: Scalars['Int'] | null;
+  readonly acidity_lt?: Scalars['Int'] | null;
+  readonly acidity_lte?: Scalars['Int'] | null;
+  readonly acidity_gt?: Scalars['Int'] | null;
+  readonly acidity_gte?: Scalars['Int'] | null;
+  readonly acidity_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly acidity_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly tannins?: Scalars['Int'] | null;
+  readonly tannins_not?: Scalars['Int'] | null;
+  readonly tannins_lt?: Scalars['Int'] | null;
+  readonly tannins_lte?: Scalars['Int'] | null;
+  readonly tannins_gt?: Scalars['Int'] | null;
+  readonly tannins_gte?: Scalars['Int'] | null;
+  readonly tannins_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly tannins_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly alcohol?: Scalars['Int'] | null;
+  readonly alcohol_not?: Scalars['Int'] | null;
+  readonly alcohol_lt?: Scalars['Int'] | null;
+  readonly alcohol_lte?: Scalars['Int'] | null;
+  readonly alcohol_gt?: Scalars['Int'] | null;
+  readonly alcohol_gte?: Scalars['Int'] | null;
+  readonly alcohol_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly alcohol_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly body?: Scalars['Int'] | null;
+  readonly body_not?: Scalars['Int'] | null;
+  readonly body_lt?: Scalars['Int'] | null;
+  readonly body_lte?: Scalars['Int'] | null;
+  readonly body_gt?: Scalars['Int'] | null;
+  readonly body_gte?: Scalars['Int'] | null;
+  readonly body_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly body_not_in?: ReadonlyArray<Scalars['Int'] | null> | null;
+  readonly redFruit?: Scalars['Boolean'] | null;
+  readonly redFruit_not?: Scalars['Boolean'] | null;
+  readonly blackFruit?: Scalars['Boolean'] | null;
+  readonly blackFruit_not?: Scalars['Boolean'] | null;
+  readonly floral?: Scalars['Boolean'] | null;
+  readonly floral_not?: Scalars['Boolean'] | null;
+  readonly herbacious?: Scalars['Boolean'] | null;
+  readonly herbacious_not?: Scalars['Boolean'] | null;
+  readonly earth?: Scalars['Boolean'] | null;
+  readonly earth_not?: Scalars['Boolean'] | null;
+  readonly bakingSpice?: Scalars['Boolean'] | null;
+  readonly bakingSpice_not?: Scalars['Boolean'] | null;
+  readonly leather?: Scalars['Boolean'] | null;
+  readonly leather_not?: Scalars['Boolean'] | null;
+  readonly citrusFruit?: Scalars['Boolean'] | null;
+  readonly citrusFruit_not?: Scalars['Boolean'] | null;
+  readonly stoneFruit?: Scalars['Boolean'] | null;
+  readonly stoneFruit_not?: Scalars['Boolean'] | null;
+  readonly tropicalFruit?: Scalars['Boolean'] | null;
+  readonly tropicalFruit_not?: Scalars['Boolean'] | null;
+  readonly honey?: Scalars['Boolean'] | null;
+  readonly honey_not?: Scalars['Boolean'] | null;
+  readonly creaminess?: Scalars['Boolean'] | null;
+  readonly creaminess_not?: Scalars['Boolean'] | null;
+  readonly minerality?: Scalars['Boolean'] | null;
+  readonly minerality_not?: Scalars['Boolean'] | null;
+  readonly bitterness?: Scalars['Boolean'] | null;
+  readonly bitterness_not?: Scalars['Boolean'] | null;
+  readonly herbalOrGreen?: Scalars['Boolean'] | null;
+  readonly herbalOrGreen_not?: Scalars['Boolean'] | null;
+  readonly whiteFloral?: Scalars['Boolean'] | null;
+  readonly whiteFloral_not?: Scalars['Boolean'] | null;
   readonly geolocateX?: Scalars['Float'] | null;
   readonly geolocateX_not?: Scalars['Float'] | null;
   readonly geolocateX_lt?: Scalars['Float'] | null;
@@ -241,14 +321,6 @@ export type WineWhereInput = {
   readonly geolocateY_gte?: Scalars['Float'] | null;
   readonly geolocateY_in?: ReadonlyArray<Scalars['Float'] | null> | null;
   readonly geolocateY_not_in?: ReadonlyArray<Scalars['Float'] | null> | null;
-  readonly hue?: Scalars['String'] | null;
-  readonly hue_not?: Scalars['String'] | null;
-  readonly hue_in?: ReadonlyArray<Scalars['String'] | null> | null;
-  readonly hue_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
-  readonly carbonation?: Scalars['String'] | null;
-  readonly carbonation_not?: Scalars['String'] | null;
-  readonly carbonation_in?: ReadonlyArray<Scalars['String'] | null> | null;
-  readonly carbonation_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly consumptionDate?: Scalars['String'] | null;
   readonly consumptionDate_not?: Scalars['String'] | null;
   readonly consumptionDate_lt?: Scalars['String'] | null;
@@ -284,16 +356,58 @@ export type SortWinesBy =
   | 'price_DESC'
   | 'vintage_ASC'
   | 'vintage_DESC'
-  | 'rating_ASC'
-  | 'rating_DESC'
-  | 'geolocateX_ASC'
-  | 'geolocateX_DESC'
-  | 'geolocateY_ASC'
-  | 'geolocateY_DESC'
   | 'hue_ASC'
   | 'hue_DESC'
   | 'carbonation_ASC'
   | 'carbonation_DESC'
+  | 'rating_ASC'
+  | 'rating_DESC'
+  | 'sweetness_ASC'
+  | 'sweetness_DESC'
+  | 'acidity_ASC'
+  | 'acidity_DESC'
+  | 'tannins_ASC'
+  | 'tannins_DESC'
+  | 'alcohol_ASC'
+  | 'alcohol_DESC'
+  | 'body_ASC'
+  | 'body_DESC'
+  | 'redFruit_ASC'
+  | 'redFruit_DESC'
+  | 'blackFruit_ASC'
+  | 'blackFruit_DESC'
+  | 'floral_ASC'
+  | 'floral_DESC'
+  | 'herbacious_ASC'
+  | 'herbacious_DESC'
+  | 'earth_ASC'
+  | 'earth_DESC'
+  | 'bakingSpice_ASC'
+  | 'bakingSpice_DESC'
+  | 'leather_ASC'
+  | 'leather_DESC'
+  | 'citrusFruit_ASC'
+  | 'citrusFruit_DESC'
+  | 'stoneFruit_ASC'
+  | 'stoneFruit_DESC'
+  | 'tropicalFruit_ASC'
+  | 'tropicalFruit_DESC'
+  | 'honey_ASC'
+  | 'honey_DESC'
+  | 'creaminess_ASC'
+  | 'creaminess_DESC'
+  | 'minerality_ASC'
+  | 'minerality_DESC'
+  | 'bitterness_ASC'
+  | 'bitterness_DESC'
+  | 'herbalOrGreen_ASC'
+  | 'herbalOrGreen_DESC'
+  | 'whiteFloral_ASC'
+  | 'whiteFloral_DESC'
+  | 'geolocateX_ASC'
+  | 'geolocateX_DESC'
+  | 'geolocateY_ASC'
+  | 'geolocateY_DESC'
   | 'consumptionDate_ASC'
   | 'consumptionDate_DESC'
   | 'user_ASC'
@@ -308,11 +422,32 @@ export type WineUpdateInput = {
   readonly vintner?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
   readonly vintage?: Scalars['Int'] | null;
-  readonly rating?: Scalars['Int'] | null;
-  readonly geolocateX?: Scalars['Float'] | null;
-  readonly geolocateY?: Scalars['Float'] | null;
   readonly hue?: Scalars['String'] | null;
   readonly carbonation?: Scalars['String'] | null;
+  readonly rating?: Scalars['Int'] | null;
+  readonly sweetness?: Scalars['Int'] | null;
+  readonly acidity?: Scalars['Int'] | null;
+  readonly tannins?: Scalars['Int'] | null;
+  readonly alcohol?: Scalars['Int'] | null;
+  readonly body?: Scalars['Int'] | null;
+  readonly redFruit?: Scalars['Boolean'] | null;
+  readonly blackFruit?: Scalars['Boolean'] | null;
+  readonly floral?: Scalars['Boolean'] | null;
+  readonly herbacious?: Scalars['Boolean'] | null;
+  readonly earth?: Scalars['Boolean'] | null;
+  readonly bakingSpice?: Scalars['Boolean'] | null;
+  readonly leather?: Scalars['Boolean'] | null;
+  readonly citrusFruit?: Scalars['Boolean'] | null;
+  readonly stoneFruit?: Scalars['Boolean'] | null;
+  readonly tropicalFruit?: Scalars['Boolean'] | null;
+  readonly honey?: Scalars['Boolean'] | null;
+  readonly creaminess?: Scalars['Boolean'] | null;
+  readonly minerality?: Scalars['Boolean'] | null;
+  readonly bitterness?: Scalars['Boolean'] | null;
+  readonly herbalOrGreen?: Scalars['Boolean'] | null;
+  readonly whiteFloral?: Scalars['Boolean'] | null;
+  readonly geolocateX?: Scalars['Float'] | null;
+  readonly geolocateY?: Scalars['Float'] | null;
   readonly consumptionDate?: Scalars['String'] | null;
   readonly user?: UserRelateToOneInput | null;
   readonly image?: WineImageRelateToOneInput | null;
@@ -330,11 +465,32 @@ export type WineCreateInput = {
   readonly vintner?: Scalars['String'] | null;
   readonly price?: Scalars['Int'] | null;
   readonly vintage?: Scalars['Int'] | null;
-  readonly rating?: Scalars['Int'] | null;
-  readonly geolocateX?: Scalars['Float'] | null;
-  readonly geolocateY?: Scalars['Float'] | null;
   readonly hue?: Scalars['String'] | null;
   readonly carbonation?: Scalars['String'] | null;
+  readonly rating?: Scalars['Int'] | null;
+  readonly sweetness?: Scalars['Int'] | null;
+  readonly acidity?: Scalars['Int'] | null;
+  readonly tannins?: Scalars['Int'] | null;
+  readonly alcohol?: Scalars['Int'] | null;
+  readonly body?: Scalars['Int'] | null;
+  readonly redFruit?: Scalars['Boolean'] | null;
+  readonly blackFruit?: Scalars['Boolean'] | null;
+  readonly floral?: Scalars['Boolean'] | null;
+  readonly herbacious?: Scalars['Boolean'] | null;
+  readonly earth?: Scalars['Boolean'] | null;
+  readonly bakingSpice?: Scalars['Boolean'] | null;
+  readonly leather?: Scalars['Boolean'] | null;
+  readonly citrusFruit?: Scalars['Boolean'] | null;
+  readonly stoneFruit?: Scalars['Boolean'] | null;
+  readonly tropicalFruit?: Scalars['Boolean'] | null;
+  readonly honey?: Scalars['Boolean'] | null;
+  readonly creaminess?: Scalars['Boolean'] | null;
+  readonly minerality?: Scalars['Boolean'] | null;
+  readonly bitterness?: Scalars['Boolean'] | null;
+  readonly herbalOrGreen?: Scalars['Boolean'] | null;
+  readonly whiteFloral?: Scalars['Boolean'] | null;
+  readonly geolocateX?: Scalars['Float'] | null;
+  readonly geolocateY?: Scalars['Float'] | null;
   readonly consumptionDate?: Scalars['String'] | null;
   readonly user?: UserRelateToOneInput | null;
   readonly image?: WineImageRelateToOneInput | null;
@@ -531,11 +687,32 @@ export type WineListTypeInfo = {
     | 'vintner'
     | 'price'
     | 'vintage'
-    | 'rating'
-    | 'geolocateX'
-    | 'geolocateY'
     | 'hue'
     | 'carbonation'
+    | 'rating'
+    | 'sweetness'
+    | 'acidity'
+    | 'tannins'
+    | 'alcohol'
+    | 'body'
+    | 'redFruit'
+    | 'blackFruit'
+    | 'floral'
+    | 'herbacious'
+    | 'earth'
+    | 'bakingSpice'
+    | 'leather'
+    | 'citrusFruit'
+    | 'stoneFruit'
+    | 'tropicalFruit'
+    | 'honey'
+    | 'creaminess'
+    | 'minerality'
+    | 'bitterness'
+    | 'herbalOrGreen'
+    | 'whiteFloral'
+    | 'geolocateX'
+    | 'geolocateY'
     | 'consumptionDate'
     | 'user'
     | 'image';
@@ -547,11 +724,32 @@ export type WineListTypeInfo = {
     readonly vintner?: string | null;
     readonly price?: number | null;
     readonly vintage?: number | null;
-    readonly rating?: number | null;
-    readonly geolocateX?: number | null;
-    readonly geolocateY?: number | null;
     readonly hue?: string | null;
     readonly carbonation?: string | null;
+    readonly rating?: number | null;
+    readonly sweetness?: number | null;
+    readonly acidity?: number | null;
+    readonly tannins?: number | null;
+    readonly alcohol?: number | null;
+    readonly body?: number | null;
+    readonly redFruit?: boolean | null;
+    readonly blackFruit?: boolean | null;
+    readonly floral?: boolean | null;
+    readonly herbacious?: boolean | null;
+    readonly earth?: boolean | null;
+    readonly bakingSpice?: boolean | null;
+    readonly leather?: boolean | null;
+    readonly citrusFruit?: boolean | null;
+    readonly stoneFruit?: boolean | null;
+    readonly tropicalFruit?: boolean | null;
+    readonly honey?: boolean | null;
+    readonly creaminess?: boolean | null;
+    readonly minerality?: boolean | null;
+    readonly bitterness?: boolean | null;
+    readonly herbalOrGreen?: boolean | null;
+    readonly whiteFloral?: boolean | null;
+    readonly geolocateX?: number | null;
+    readonly geolocateY?: number | null;
     readonly consumptionDate?: Date | null;
     readonly user?: string | null;
     readonly image?: string | null;

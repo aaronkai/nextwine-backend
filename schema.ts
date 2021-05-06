@@ -6,8 +6,8 @@ import {
   timestamp,
   select,
   integer,
-  decimal,
   float,
+  checkbox,
 } from '@keystone-next/fields';
 import 'dotenv/config';
 import { cloudinaryImage } from '@keystone-next/cloudinary';
@@ -50,13 +50,6 @@ export const lists = createSchema({
       vintner: text({ isRequired: true}),
       price: integer({isRequired: true}),
       vintage: integer({isRequired:true}),
-      rating: integer({isRequired:true}),
-      geolocateX: float({ 
-        isRequired: false,
-      }),     
-      geolocateY: float({ 
-        isRequired: false,
-      }),
       hue: select({
         dataType: 'string',
         options: [
@@ -78,6 +71,75 @@ export const lists = createSchema({
         isRequired: true,
         ui: { displayMode: 'segmented-control' },
       }),
+
+      // general attributes, range 1-5
+      rating: integer({isRequired:true}),
+      sweetness: integer({isRequired:true}),
+      acidity: integer({isRequired:true}),
+      tannins: integer({isRequired:true}),
+      alcohol: integer({isRequired:true}),
+      body: integer({isRequired:true}),
+      
+      // red wine attributes
+      redFruit: checkbox({
+        defaultValue: false,
+      }),
+      blackFruit: checkbox({
+        defaultValue: false,
+      }),
+      floral: checkbox({
+        defaultValue: false,
+      }),
+      herbacious: checkbox({
+        defaultValue: false,
+      }),
+      earth: checkbox({
+        defaultValue: false,
+      }),
+      bakingSpice: checkbox({
+        defaultValue: false,
+      }),
+      leather: checkbox({
+        defaultValue: false,
+      }),
+
+      // white wine attributes
+      citrusFruit: checkbox({
+        defaultValue: false,
+      }),
+      stoneFruit: checkbox({
+        defaultValue: false,
+      }),
+      tropicalFruit: checkbox({
+        defaultValue: false,
+      }),
+      honey: checkbox({
+        defaultValue: false,
+      }),
+      creaminess: checkbox({
+        defaultValue: false,
+      }),
+      minerality: checkbox({
+        defaultValue: false,
+      }),
+      bitterness: checkbox({
+        defaultValue: false,
+      }),
+      herbalOrGreen: checkbox({
+        defaultValue: false,
+      }),
+      whiteFloral: checkbox({
+        defaultValue: false,
+      }),
+
+      // geolocation
+      geolocateX: float({ 
+        isRequired: false,
+      }),     
+      geolocateY: float({ 
+        isRequired: false,
+      }),
+     
       consumptionDate: timestamp({isRequired:true}),
       user: relationship({
         ref: 'User.wines',
@@ -94,7 +156,7 @@ export const lists = createSchema({
           inlineCreate: { fields: ['image', 'altText'] },
           inlineEdit: { fields: ['image', 'altText'] },
         },
-      })
+      }),      
     },
   }),
 
@@ -120,4 +182,4 @@ export const lists = createSchema({
       },
     },
   }),
-});
+})

@@ -135,11 +135,32 @@ type Wine {
   vintner: String
   price: Int
   vintage: Int
-  rating: Int
-  geolocateX: Float
-  geolocateY: Float
   hue: String
   carbonation: String
+  rating: Int
+  sweetness: Int
+  acidity: Int
+  tannins: Int
+  alcohol: Int
+  body: Int
+  redFruit: Boolean
+  blackFruit: Boolean
+  floral: Boolean
+  herbacious: Boolean
+  earth: Boolean
+  bakingSpice: Boolean
+  leather: Boolean
+  citrusFruit: Boolean
+  stoneFruit: Boolean
+  tropicalFruit: Boolean
+  honey: Boolean
+  creaminess: Boolean
+  minerality: Boolean
+  bitterness: Boolean
+  herbalOrGreen: Boolean
+  whiteFloral: Boolean
+  geolocateX: Float
+  geolocateY: Float
   consumptionDate: String
   user: User
   image: WineImage
@@ -244,6 +265,14 @@ input WineWhereInput {
   vintage_gte: Int
   vintage_in: [Int]
   vintage_not_in: [Int]
+  hue: String
+  hue_not: String
+  hue_in: [String]
+  hue_not_in: [String]
+  carbonation: String
+  carbonation_not: String
+  carbonation_in: [String]
+  carbonation_not_in: [String]
   rating: Int
   rating_not: Int
   rating_lt: Int
@@ -252,6 +281,78 @@ input WineWhereInput {
   rating_gte: Int
   rating_in: [Int]
   rating_not_in: [Int]
+  sweetness: Int
+  sweetness_not: Int
+  sweetness_lt: Int
+  sweetness_lte: Int
+  sweetness_gt: Int
+  sweetness_gte: Int
+  sweetness_in: [Int]
+  sweetness_not_in: [Int]
+  acidity: Int
+  acidity_not: Int
+  acidity_lt: Int
+  acidity_lte: Int
+  acidity_gt: Int
+  acidity_gte: Int
+  acidity_in: [Int]
+  acidity_not_in: [Int]
+  tannins: Int
+  tannins_not: Int
+  tannins_lt: Int
+  tannins_lte: Int
+  tannins_gt: Int
+  tannins_gte: Int
+  tannins_in: [Int]
+  tannins_not_in: [Int]
+  alcohol: Int
+  alcohol_not: Int
+  alcohol_lt: Int
+  alcohol_lte: Int
+  alcohol_gt: Int
+  alcohol_gte: Int
+  alcohol_in: [Int]
+  alcohol_not_in: [Int]
+  body: Int
+  body_not: Int
+  body_lt: Int
+  body_lte: Int
+  body_gt: Int
+  body_gte: Int
+  body_in: [Int]
+  body_not_in: [Int]
+  redFruit: Boolean
+  redFruit_not: Boolean
+  blackFruit: Boolean
+  blackFruit_not: Boolean
+  floral: Boolean
+  floral_not: Boolean
+  herbacious: Boolean
+  herbacious_not: Boolean
+  earth: Boolean
+  earth_not: Boolean
+  bakingSpice: Boolean
+  bakingSpice_not: Boolean
+  leather: Boolean
+  leather_not: Boolean
+  citrusFruit: Boolean
+  citrusFruit_not: Boolean
+  stoneFruit: Boolean
+  stoneFruit_not: Boolean
+  tropicalFruit: Boolean
+  tropicalFruit_not: Boolean
+  honey: Boolean
+  honey_not: Boolean
+  creaminess: Boolean
+  creaminess_not: Boolean
+  minerality: Boolean
+  minerality_not: Boolean
+  bitterness: Boolean
+  bitterness_not: Boolean
+  herbalOrGreen: Boolean
+  herbalOrGreen_not: Boolean
+  whiteFloral: Boolean
+  whiteFloral_not: Boolean
   geolocateX: Float
   geolocateX_not: Float
   geolocateX_lt: Float
@@ -268,14 +369,6 @@ input WineWhereInput {
   geolocateY_gte: Float
   geolocateY_in: [Float]
   geolocateY_not_in: [Float]
-  hue: String
-  hue_not: String
-  hue_in: [String]
-  hue_not_in: [String]
-  carbonation: String
-  carbonation_not: String
-  carbonation_in: [String]
-  carbonation_not_in: [String]
   consumptionDate: String
   consumptionDate_not: String
   consumptionDate_lt: String
@@ -309,16 +402,58 @@ enum SortWinesBy {
   price_DESC
   vintage_ASC
   vintage_DESC
-  rating_ASC
-  rating_DESC
-  geolocateX_ASC
-  geolocateX_DESC
-  geolocateY_ASC
-  geolocateY_DESC
   hue_ASC
   hue_DESC
   carbonation_ASC
   carbonation_DESC
+  rating_ASC
+  rating_DESC
+  sweetness_ASC
+  sweetness_DESC
+  acidity_ASC
+  acidity_DESC
+  tannins_ASC
+  tannins_DESC
+  alcohol_ASC
+  alcohol_DESC
+  body_ASC
+  body_DESC
+  redFruit_ASC
+  redFruit_DESC
+  blackFruit_ASC
+  blackFruit_DESC
+  floral_ASC
+  floral_DESC
+  herbacious_ASC
+  herbacious_DESC
+  earth_ASC
+  earth_DESC
+  bakingSpice_ASC
+  bakingSpice_DESC
+  leather_ASC
+  leather_DESC
+  citrusFruit_ASC
+  citrusFruit_DESC
+  stoneFruit_ASC
+  stoneFruit_DESC
+  tropicalFruit_ASC
+  tropicalFruit_DESC
+  honey_ASC
+  honey_DESC
+  creaminess_ASC
+  creaminess_DESC
+  minerality_ASC
+  minerality_DESC
+  bitterness_ASC
+  bitterness_DESC
+  herbalOrGreen_ASC
+  herbalOrGreen_DESC
+  whiteFloral_ASC
+  whiteFloral_DESC
+  geolocateX_ASC
+  geolocateX_DESC
+  geolocateY_ASC
+  geolocateY_DESC
   consumptionDate_ASC
   consumptionDate_DESC
   user_ASC
@@ -334,11 +469,32 @@ input WineUpdateInput {
   vintner: String
   price: Int
   vintage: Int
-  rating: Int
-  geolocateX: Float
-  geolocateY: Float
   hue: String
   carbonation: String
+  rating: Int
+  sweetness: Int
+  acidity: Int
+  tannins: Int
+  alcohol: Int
+  body: Int
+  redFruit: Boolean
+  blackFruit: Boolean
+  floral: Boolean
+  herbacious: Boolean
+  earth: Boolean
+  bakingSpice: Boolean
+  leather: Boolean
+  citrusFruit: Boolean
+  stoneFruit: Boolean
+  tropicalFruit: Boolean
+  honey: Boolean
+  creaminess: Boolean
+  minerality: Boolean
+  bitterness: Boolean
+  herbalOrGreen: Boolean
+  whiteFloral: Boolean
+  geolocateX: Float
+  geolocateY: Float
   consumptionDate: String
   user: UserRelateToOneInput
   image: WineImageRelateToOneInput
@@ -356,11 +512,32 @@ input WineCreateInput {
   vintner: String
   price: Int
   vintage: Int
-  rating: Int
-  geolocateX: Float
-  geolocateY: Float
   hue: String
   carbonation: String
+  rating: Int
+  sweetness: Int
+  acidity: Int
+  tannins: Int
+  alcohol: Int
+  body: Int
+  redFruit: Boolean
+  blackFruit: Boolean
+  floral: Boolean
+  herbacious: Boolean
+  earth: Boolean
+  bakingSpice: Boolean
+  leather: Boolean
+  citrusFruit: Boolean
+  stoneFruit: Boolean
+  tropicalFruit: Boolean
+  honey: Boolean
+  creaminess: Boolean
+  minerality: Boolean
+  bitterness: Boolean
+  herbalOrGreen: Boolean
+  whiteFloral: Boolean
+  geolocateX: Float
+  geolocateY: Float
   consumptionDate: String
   user: UserRelateToOneInput
   image: WineImageRelateToOneInput
