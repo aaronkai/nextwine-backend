@@ -40,7 +40,7 @@ export default auth.withAuth(
     db: {
       adapter: process.env.POSTGRES_ADAPTER,
       // url: process.env.POSTGRES_URL,
-      url: process.env.ELEPHANT_URL,
+      url: process.env.DATABASE_URL,
       // adapter: process.env.MONGO_ADAPTER,
       // url: process.env.MONGO_URL,
       async onConnect(keystone){
