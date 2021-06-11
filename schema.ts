@@ -1,4 +1,6 @@
-import { createSchema, list } from '@keystone-next/keystone/schema';
+import { createSchema, list } from "@keystone-next/keystone/schema";
+import { logging } from "@keystone-next/list-plugins-legacy/";
+
 import {
   text,
   relationship,
@@ -8,9 +10,9 @@ import {
   integer,
   float,
   checkbox,
-} from '@keystone-next/fields';
-import 'dotenv/config';
-import { cloudinaryImage } from '@keystone-next/cloudinary';
+} from "@keystone-next/fields";
+import "dotenv/config";
+import { cloudinaryImage } from "@keystone-next/cloudinary";
 
 // ToDo: add access controls
 // import { isSignedIn, permissions } from '../access';
@@ -19,67 +21,68 @@ export const cloudinary = {
   cloudName: process.env.CLOUDINARY_CLOUD_NAME,
   apiKey: process.env.CLOUDINARY_KEY,
   apiSecret: process.env.CLOUDINARY_SECRET,
-  folder: 'nextwine',
+  folder: "nextwine",
 };
 
 export const lists = createSchema({
   User: list({
     ui: {
       listView: {
-        initialColumns: ['name', 'wines'],
+        initialColumns: ["name", "wines"],
       },
     },
     fields: {
       name: text({ isRequired: true }),
       email: text({ isRequired: true, isUnique: true }),
       password: password(),
-      wines: relationship({ ref: 'Wine.user', many: true }),
+      wines: relationship({ ref: "Wine.user", many: true }),
     },
+    plugins: [logging((args) => console.log(args))],
   }),
 
   Wine: list({
     ui: {
       listView: {
-        initialColumns: ['name', 'consumptionDate'],
+        initialColumns: ["name", "consumptionDate"],
       },
     },
     fields: {
       name: text({ isRequired: true }),
-      region: text({ isRequired: true}),
-      notes: text({ isRequired: true}),
-      vintner: text({ isRequired: true}),
-      price: integer({isRequired: true}),
-      vintage: integer({isRequired:true}),
+      region: text({ isRequired: true }),
+      notes: text({ isRequired: true }),
+      vintner: text({ isRequired: true }),
+      price: integer({ isRequired: true }),
+      vintage: integer({ isRequired: true }),
       hue: select({
-        dataType: 'string',
+        dataType: "string",
         options: [
-          { label: 'Red', value: 'red' },
-          { label: 'White', value: 'white' },
-          { label: 'Rose', value: 'rose' },          
+          { label: "Red", value: "red" },
+          { label: "White", value: "white" },
+          { label: "Rose", value: "rose" },
         ],
-        defaultValue: 'Red',
+        defaultValue: "Red",
         isRequired: true,
-        ui: { displayMode: 'segmented-control' },
+        ui: { displayMode: "segmented-control" },
       }),
       carbonation: select({
-        dataType: 'string',
+        dataType: "string",
         options: [
-          { label: 'Still', value: 'still' },
-          { label: 'Sparkling', value: 'sparkling' },
+          { label: "Still", value: "still" },
+          { label: "Sparkling", value: "sparkling" },
         ],
-        defaultValue: 'still',
+        defaultValue: "still",
         isRequired: true,
-        ui: { displayMode: 'segmented-control' },
+        ui: { displayMode: "segmented-control" },
       }),
 
       // general attributes, range 1-5
-      rating: integer({isRequired:true}),
-      sweetness: integer({isRequired:true}),
-      acidity: integer({isRequired:true}),
-      tannins: integer({isRequired:true}),
-      alcohol: integer({isRequired:true}),
-      body: integer({isRequired:true}),
-      
+      rating: integer({ isRequired: true }),
+      sweetness: integer({ isRequired: true }),
+      acidity: integer({ isRequired: true }),
+      tannins: integer({ isRequired: true }),
+      alcohol: integer({ isRequired: true }),
+      body: integer({ isRequired: true }),
+
       // red wine attributes
       redFruit: checkbox({
         defaultValue: false,
@@ -133,33 +136,32 @@ export const lists = createSchema({
       }),
 
       // geolocation
-      geolocateX: float({ 
-        isRequired: false,
-      }),     
-      geolocateY: float({ 
+      geolocateX: float({
         isRequired: false,
       }),
-     
-      consumptionDate: timestamp({isRequired:true}),
+      geolocateY: float({
+        isRequired: false,
+      }),
+
+      consumptionDate: timestamp({ isRequired: true }),
       user: relationship({
-        ref: 'User.wines',
+        ref: "User.wines",
         many: false,
         defaultValue: ({ context }) => ({
-          connect: { id: context.session.itemId},
-        })
+          connect: { id: context.session.itemId },
+        }),
       }),
       image: relationship({
-        ref: 'WineImage.wine',
+        ref: "WineImage.wine",
         ui: {
-          displayMode: 'cards',
-          cardFields: ['image', 'altText'],
-          inlineCreate: { fields: ['image', 'altText'] },
-          inlineEdit: { fields: ['image', 'altText'] },
+          displayMode: "cards",
+          cardFields: ["image", "altText"],
+          inlineCreate: { fields: ["image", "altText"] },
+          inlineEdit: { fields: ["image", "altText"] },
         },
-      }),      
+      }),
     },
   }),
-
 
   WineImage: list({
     // access: {
@@ -171,15 +173,15 @@ export const lists = createSchema({
     fields: {
       image: cloudinaryImage({
         cloudinary,
-        label: 'Source',
+        label: "Source",
       }),
       altText: text(),
-      wine: relationship({ ref: 'Wine.image' }),
+      wine: relationship({ ref: "Wine.image" }),
     },
     ui: {
       listView: {
-        initialColumns: ['image', 'altText', 'wine'],
+        initialColumns: ["image", "altText", "wine"],
       },
     },
   }),
-})
+});
