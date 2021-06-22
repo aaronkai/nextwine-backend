@@ -1,12 +1,11 @@
 import { list } from "@keystone-next/keystone/schema";
 import { text, password, relationship } from "@keystone-next/fields";
 import { permissions, rules } from "../access";
-import { logging } from "@keystone-next/list-plugins-legacy/";
 
 export const User = list({
   access: {
     create: () => true,
-    read: () => true,
+    read: () => true, // ? Might want to do this differently eventually. but as is, need to be exposed in order for the landing page to render
     update: rules.canManageUsers,
     // only people with the permission can delete themselves!
     // You can't delete yourself
@@ -33,5 +32,4 @@ export const User = list({
       many: true,
     }),
   },
-  plugins: [logging((args) => console.log(args))],
 });

@@ -1,7 +1,7 @@
 import { permissionsList } from "./schemas/fields";
 import { ListAccessArgs } from "./types";
-// At it's simplest, the access control returns a yes or no value depending on the users session
 
+// At it's simplest, the access control returns a yes or no value depending on the users session
 export function isSignedIn({ session }: ListAccessArgs) {
   return !!session;
 }
@@ -21,15 +21,13 @@ const generatedPermissions = Object.fromEntries(
 // Permissions check if someone meets a criteria - yes or no.
 export const permissions = {
   ...generatedPermissions,
-  isAwesome({ session }: ListAccessArgs): boolean {
-    return session?.data.name.includes("wes");
-  },
 };
 
 // Rule based function
 // Rules can return a boolean - yes or no - or a filter which limits which products they can CRUD.
 export const rules = {
   canManageWines({ session }: ListAccessArgs) {
+    console.log(`canManageWines ${session}`);
     if (!isSignedIn({ session })) {
       return false;
     }
@@ -40,17 +38,10 @@ export const rules = {
     // 2. If not, do they own this item?
     return { user: { id: session.itemId } };
   },
-  // canReadWines({ session }: ListAccessArgs) {
-  //   if (!isSignedIn({ session })) {
-  //     return false;
-  //   }
-  //   if (permissions.canManageProducts({ session })) {
-  //     return true; // They can read everything!
-  //   }
-  //   // They should only see available products (based on the status field)
-  //   return { status: "AVAILABLE" };
-  // },
+
   canManageUsers({ session }: ListAccessArgs) {
+    console.log(`canManageUsers ${session}`);
+
     if (!isSignedIn({ session })) {
       return false;
     }
