@@ -33,11 +33,14 @@ const auth = createAuth({
 });
 
 let frontendURL;
+let databaseURL;
 
 if (process.env.NODE_ENV === "production") {
   frontendURL = process.env.FRONTEND_URL_PROD;
+  databaseURL = process.env.DO_POSTGRES_URL;
 } else {
   frontendURL = process.env.FRONTEND_URL_DEV;
+  databaseURL = process.env.LOCALHOST_POSTGRES_URL;
 }
 
 console.log(`Allowing connections from ${frontendURL}`);
@@ -58,7 +61,7 @@ export default auth.withAuth(
     },
     db: {
       adapter: process.env.POSTGRES_ADAPTER,
-      url: process.env.LOCALHOST_POSTGRES_URL,
+      url: databaseURL,
       async onConnect(keystone) {
         console.log("Connected to the database");
       },
