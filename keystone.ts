@@ -35,6 +35,7 @@ const auth = createAuth({
 let frontendURL;
 let databaseURL;
 
+// Set correct env variables
 if (process.env.NODE_ENV === "production") {
   frontendURL = process.env.FRONTEND_URL_PROD;
   databaseURL = process.env.DO_POSTGRES_URL;
@@ -43,6 +44,14 @@ if (process.env.NODE_ENV === "production") {
   databaseURL = process.env.LOCALHOST_POSTGRES_URL;
 }
 
+if (process.env.NODE_ENV === "production") {
+  dbURL = process.env.DB_URL_PROD;
+} else {
+  dbURL = process.env.DB_URL_DEV;
+}
+
+console.log(`node env is: ${process.env.NODE_ENV}`);
+console.log(`database is: ${frontendURL}`);
 console.log(`Allowing connections from ${frontendURL}`);
 
 const sessionConfig = {
@@ -76,8 +85,8 @@ export default auth.withAuth(
       WineImage,
     }),
     session: withItemData(statelessSessions(sessionConfig), {
-      // User: `id name email role { ${permissionsList.join(" ")} }`,
-      User: `name`,
+      User: `id name email role { ${permissionsList.join(" ")} }`,
+      // User: `name`,
     }),
   })
 );
