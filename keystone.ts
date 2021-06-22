@@ -29,6 +29,9 @@ const auth = createAuth({
     fields: ['name', 'email', 'password'],
   },
 });
+
+console.log(`connecting to DB ${process.env.DO_POSTGRES_URL}`);
+
 export default auth.withAuth(
   config({
     server: {
@@ -40,7 +43,8 @@ export default auth.withAuth(
     db: {
       adapter: process.env.POSTGRES_ADAPTER,
       // url: process.env.POSTGRES_URL,
-      url: process.env.ELEPHANT_URL,
+      //url: process.env.ELEPHANT_URL,
+      url: process.env.DO_POSTGRES_URL,
       // adapter: process.env.MONGO_ADAPTER,
       // url: process.env.MONGO_URL,
       async onConnect(keystone){
