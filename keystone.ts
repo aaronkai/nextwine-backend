@@ -1,12 +1,15 @@
 import "dotenv/config";
-import { config } from "@keystone-next/keystone/schema";
+import { config, createSchema } from "@keystone-next/keystone/schema";
 import {
   statelessSessions,
   withItemData,
 } from "@keystone-next/keystone/session";
 import { createAuth } from "@keystone-next/auth";
-import { lists } from "./schema";
-import { logging } from "@keystone-next/list-plugins-legacy/";
+import { permissionsList } from "./schemas/fields";
+import { User } from "./schemas/User";
+import { Role } from "./schemas/Role";
+import { Wine } from "./schemas/Wine";
+import { WineImage } from "./schemas/WineImage";
 
 let sessionSecret = process.env.SESSION_SECRET;
 
@@ -19,8 +22,6 @@ if (!sessionSecret) {
     sessionSecret = "This can be anything, anything in the world";
   }
 }
-
-let sessionMaxAge = 60 * 60 * 24 * 30; // 30 days
 
 const auth = createAuth({
   listKey: "User",
@@ -41,8 +42,14 @@ if (process.env.NODE_ENV === "production") {
 
 console.log(`Allowing connections from ${frontendURL}`);
 
+const sessionConfig = {
+  maxAge: 60 * 60 * 24 * 360, // How long they stay signed in?
+  secret: process.env.SESSION_SECRET,
+};
+
 export default auth.withAuth(
   config({
+    // @ts-ignore
     server: {
       cors: {
         origin: [frontendURL],
@@ -59,13 +66,15 @@ export default auth.withAuth(
     ui: {
       isAccessAllowed: (context) => !!context.session?.data,
     },
-    lists,
-    session: withItemData(
-      statelessSessions({
-        maxAge: sessionMaxAge,
-        secret: sessionSecret,
-      }),
-      { User: "name" }
-    ),
+    lists: createSchema({
+      User,
+      Role,
+      Wine,
+      WineImage,
+    }),
+    session: withItemData(statelessSessions(sessionConfig), {
+      // User: `id name email role { ${permissionsList.join(" ")} }`,
+      User: `name`,
+    }),
   })
 );
