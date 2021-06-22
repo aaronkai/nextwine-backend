@@ -7,6 +7,13 @@ type Scalars = {
   readonly JSON: import('@keystone-next/types').JSONValue;
 };
 
+export type RoleRelateToOneInput = {
+  readonly create?: RoleCreateInput | null;
+  readonly connect?: RoleWhereUniqueInput | null;
+  readonly disconnect?: RoleWhereUniqueInput | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
 export type WineRelateToManyInput = {
   readonly create?: ReadonlyArray<WineCreateInput | null> | null;
   readonly connect?: ReadonlyArray<WineWhereUniqueInput | null> | null;
@@ -62,6 +69,8 @@ export type UserWhereInput = {
   readonly email_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly email_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
   readonly password_is_set?: Scalars['Boolean'] | null;
+  readonly role?: RoleWhereInput | null;
+  readonly role_is_null?: Scalars['Boolean'] | null;
   readonly wines_every?: WineWhereInput | null;
   readonly wines_some?: WineWhereInput | null;
   readonly wines_none?: WineWhereInput | null;
@@ -78,6 +87,8 @@ export type SortUsersBy =
   | 'name_DESC'
   | 'email_ASC'
   | 'email_DESC'
+  | 'role_ASC'
+  | 'role_DESC'
   | 'wines_ASC'
   | 'wines_DESC';
 
@@ -85,6 +96,7 @@ export type UserUpdateInput = {
   readonly name?: Scalars['String'] | null;
   readonly email?: Scalars['String'] | null;
   readonly password?: Scalars['String'] | null;
+  readonly role?: RoleRelateToOneInput | null;
   readonly wines?: WineRelateToManyInput | null;
 };
 
@@ -97,11 +109,108 @@ export type UserCreateInput = {
   readonly name?: Scalars['String'] | null;
   readonly email?: Scalars['String'] | null;
   readonly password?: Scalars['String'] | null;
+  readonly role?: RoleRelateToOneInput | null;
   readonly wines?: WineRelateToManyInput | null;
 };
 
 export type UsersCreateInput = {
   readonly data?: UserCreateInput | null;
+};
+
+export type UserRelateToManyInput = {
+  readonly create?: ReadonlyArray<UserCreateInput | null> | null;
+  readonly connect?: ReadonlyArray<UserWhereUniqueInput | null> | null;
+  readonly disconnect?: ReadonlyArray<UserWhereUniqueInput | null> | null;
+  readonly disconnectAll?: Scalars['Boolean'] | null;
+};
+
+export type RoleWhereInput = {
+  readonly AND?: ReadonlyArray<RoleWhereInput | null> | null;
+  readonly OR?: ReadonlyArray<RoleWhereInput | null> | null;
+  readonly id?: Scalars['ID'] | null;
+  readonly id_not?: Scalars['ID'] | null;
+  readonly id_lt?: Scalars['ID'] | null;
+  readonly id_lte?: Scalars['ID'] | null;
+  readonly id_gt?: Scalars['ID'] | null;
+  readonly id_gte?: Scalars['ID'] | null;
+  readonly id_in?: ReadonlyArray<Scalars['ID'] | null> | null;
+  readonly id_not_in?: ReadonlyArray<Scalars['ID'] | null> | null;
+  readonly name?: Scalars['String'] | null;
+  readonly name_not?: Scalars['String'] | null;
+  readonly name_contains?: Scalars['String'] | null;
+  readonly name_not_contains?: Scalars['String'] | null;
+  readonly name_starts_with?: Scalars['String'] | null;
+  readonly name_not_starts_with?: Scalars['String'] | null;
+  readonly name_ends_with?: Scalars['String'] | null;
+  readonly name_not_ends_with?: Scalars['String'] | null;
+  readonly name_i?: Scalars['String'] | null;
+  readonly name_not_i?: Scalars['String'] | null;
+  readonly name_contains_i?: Scalars['String'] | null;
+  readonly name_not_contains_i?: Scalars['String'] | null;
+  readonly name_starts_with_i?: Scalars['String'] | null;
+  readonly name_not_starts_with_i?: Scalars['String'] | null;
+  readonly name_ends_with_i?: Scalars['String'] | null;
+  readonly name_not_ends_with_i?: Scalars['String'] | null;
+  readonly name_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly name_not_in?: ReadonlyArray<Scalars['String'] | null> | null;
+  readonly canManageWines?: Scalars['Boolean'] | null;
+  readonly canManageWines_not?: Scalars['Boolean'] | null;
+  readonly canSeeOtherUsers?: Scalars['Boolean'] | null;
+  readonly canSeeOtherUsers_not?: Scalars['Boolean'] | null;
+  readonly canManageUsers?: Scalars['Boolean'] | null;
+  readonly canManageUsers_not?: Scalars['Boolean'] | null;
+  readonly canManageRoles?: Scalars['Boolean'] | null;
+  readonly canManageRoles_not?: Scalars['Boolean'] | null;
+  readonly assignedTo_every?: UserWhereInput | null;
+  readonly assignedTo_some?: UserWhereInput | null;
+  readonly assignedTo_none?: UserWhereInput | null;
+};
+
+export type RoleWhereUniqueInput = {
+  readonly id: Scalars['ID'];
+};
+
+export type SortRolesBy =
+  | 'id_ASC'
+  | 'id_DESC'
+  | 'name_ASC'
+  | 'name_DESC'
+  | 'canManageWines_ASC'
+  | 'canManageWines_DESC'
+  | 'canSeeOtherUsers_ASC'
+  | 'canSeeOtherUsers_DESC'
+  | 'canManageUsers_ASC'
+  | 'canManageUsers_DESC'
+  | 'canManageRoles_ASC'
+  | 'canManageRoles_DESC'
+  | 'assignedTo_ASC'
+  | 'assignedTo_DESC';
+
+export type RoleUpdateInput = {
+  readonly name?: Scalars['String'] | null;
+  readonly canManageWines?: Scalars['Boolean'] | null;
+  readonly canSeeOtherUsers?: Scalars['Boolean'] | null;
+  readonly canManageUsers?: Scalars['Boolean'] | null;
+  readonly canManageRoles?: Scalars['Boolean'] | null;
+  readonly assignedTo?: UserRelateToManyInput | null;
+};
+
+export type RolesUpdateInput = {
+  readonly id: Scalars['ID'];
+  readonly data?: RoleUpdateInput | null;
+};
+
+export type RoleCreateInput = {
+  readonly name?: Scalars['String'] | null;
+  readonly canManageWines?: Scalars['Boolean'] | null;
+  readonly canSeeOtherUsers?: Scalars['Boolean'] | null;
+  readonly canManageUsers?: Scalars['Boolean'] | null;
+  readonly canManageRoles?: Scalars['Boolean'] | null;
+  readonly assignedTo?: UserRelateToManyInput | null;
+};
+
+export type RolesCreateInput = {
+  readonly data?: RoleCreateInput | null;
 };
 
 export type UserRelateToOneInput = {
@@ -644,12 +753,13 @@ export type KeystoneAdminUISortDirection = 'ASC' | 'DESC';
 
 export type UserListTypeInfo = {
   key: 'User';
-  fields: 'id' | 'name' | 'email' | 'password' | 'wines';
+  fields: 'id' | 'name' | 'email' | 'password' | 'role' | 'wines';
   backing: {
     readonly id: string;
     readonly name?: string | null;
     readonly email?: string | null;
     readonly password?: string | null;
+    readonly role?: string | null;
     readonly wines?: string | null;
   };
   inputs: {
@@ -675,6 +785,50 @@ export type UserListFn = (
 ) => import('@keystone-next/keystone/schema').ListConfig<
   UserListTypeInfo,
   UserListTypeInfo['fields']
+>;
+
+export type RoleListTypeInfo = {
+  key: 'Role';
+  fields:
+    | 'id'
+    | 'name'
+    | 'canManageWines'
+    | 'canSeeOtherUsers'
+    | 'canManageUsers'
+    | 'canManageRoles'
+    | 'assignedTo';
+  backing: {
+    readonly id: string;
+    readonly name?: string | null;
+    readonly canManageWines?: boolean | null;
+    readonly canSeeOtherUsers?: boolean | null;
+    readonly canManageUsers?: boolean | null;
+    readonly canManageRoles?: boolean | null;
+    readonly assignedTo?: string | null;
+  };
+  inputs: {
+    where: RoleWhereInput;
+    create: RoleCreateInput;
+    update: RoleUpdateInput;
+  };
+  args: {
+    listQuery: {
+      readonly where?: RoleWhereInput | null;
+      readonly sortBy?: ReadonlyArray<SortRolesBy> | null;
+      readonly first?: Scalars['Int'] | null;
+      readonly skip?: Scalars['Int'] | null;
+    };
+  };
+};
+
+export type RoleListFn = (
+  listConfig: import('@keystone-next/keystone/schema').ListConfig<
+    RoleListTypeInfo,
+    RoleListTypeInfo['fields']
+  >
+) => import('@keystone-next/keystone/schema').ListConfig<
+  RoleListTypeInfo,
+  RoleListTypeInfo['fields']
 >;
 
 export type WineListTypeInfo = {
@@ -815,6 +969,7 @@ export type WineImageListFn = (
 
 export type KeystoneListsTypeInfo = {
   readonly User: UserListTypeInfo;
+  readonly Role: RoleListTypeInfo;
   readonly Wine: WineListTypeInfo;
   readonly WineImage: WineImageListTypeInfo;
 };

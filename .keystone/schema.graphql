@@ -1,3 +1,10 @@
+input RoleRelateToOneInput {
+  create: RoleCreateInput
+  connect: RoleWhereUniqueInput
+  disconnect: RoleWhereUniqueInput
+  disconnectAll: Boolean
+}
+
 input WineRelateToManyInput {
   create: [WineCreateInput]
   connect: [WineWhereUniqueInput]
@@ -11,6 +18,7 @@ type User {
   name: String
   email: String
   password_is_set: Boolean
+  role: Role
   wines(where: WineWhereInput, search: String, sortBy: [SortWinesBy!], orderBy: String, first: Int, skip: Int): [Wine!]!
   _winesMeta(where: WineWhereInput, search: String, sortBy: [SortWinesBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
 }
@@ -63,6 +71,8 @@ input UserWhereInput {
   email_in: [String]
   email_not_in: [String]
   password_is_set: Boolean
+  role: RoleWhereInput
+  role_is_null: Boolean
 
   """ condition must be true for all nodes """
   wines_every: WineWhereInput
@@ -85,6 +95,8 @@ enum SortUsersBy {
   name_DESC
   email_ASC
   email_DESC
+  role_ASC
+  role_DESC
   wines_ASC
   wines_DESC
 }
@@ -93,6 +105,7 @@ input UserUpdateInput {
   name: String
   email: String
   password: String
+  role: RoleRelateToOneInput
   wines: WineRelateToManyInput
 }
 
@@ -105,11 +118,127 @@ input UserCreateInput {
   name: String
   email: String
   password: String
+  role: RoleRelateToOneInput
   wines: WineRelateToManyInput
 }
 
 input UsersCreateInput {
   data: UserCreateInput
+}
+
+input UserRelateToManyInput {
+  create: [UserCreateInput]
+  connect: [UserWhereUniqueInput]
+  disconnect: [UserWhereUniqueInput]
+  disconnectAll: Boolean
+}
+
+""" A keystone list """
+type Role {
+  id: ID!
+  name: String
+  canManageWines: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  assignedTo(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): [User!]!
+  _assignedToMeta(where: UserWhereInput, search: String, sortBy: [SortUsersBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+}
+
+input RoleWhereInput {
+  AND: [RoleWhereInput]
+  OR: [RoleWhereInput]
+  id: ID
+  id_not: ID
+  id_lt: ID
+  id_lte: ID
+  id_gt: ID
+  id_gte: ID
+  id_in: [ID]
+  id_not_in: [ID]
+  name: String
+  name_not: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
+  name_i: String
+  name_not_i: String
+  name_contains_i: String
+  name_not_contains_i: String
+  name_starts_with_i: String
+  name_not_starts_with_i: String
+  name_ends_with_i: String
+  name_not_ends_with_i: String
+  name_in: [String]
+  name_not_in: [String]
+  canManageWines: Boolean
+  canManageWines_not: Boolean
+  canSeeOtherUsers: Boolean
+  canSeeOtherUsers_not: Boolean
+  canManageUsers: Boolean
+  canManageUsers_not: Boolean
+  canManageRoles: Boolean
+  canManageRoles_not: Boolean
+
+  """ condition must be true for all nodes """
+  assignedTo_every: UserWhereInput
+
+  """ condition must be true for at least 1 node """
+  assignedTo_some: UserWhereInput
+
+  """ condition must be false for all nodes """
+  assignedTo_none: UserWhereInput
+}
+
+input RoleWhereUniqueInput {
+  id: ID!
+}
+
+enum SortRolesBy {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  canManageWines_ASC
+  canManageWines_DESC
+  canSeeOtherUsers_ASC
+  canSeeOtherUsers_DESC
+  canManageUsers_ASC
+  canManageUsers_DESC
+  canManageRoles_ASC
+  canManageRoles_DESC
+  assignedTo_ASC
+  assignedTo_DESC
+}
+
+input RoleUpdateInput {
+  name: String
+  canManageWines: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  assignedTo: UserRelateToManyInput
+}
+
+input RolesUpdateInput {
+  id: ID!
+  data: RoleUpdateInput
+}
+
+input RoleCreateInput {
+  name: String
+  canManageWines: Boolean
+  canSeeOtherUsers: Boolean
+  canManageUsers: Boolean
+  canManageRoles: Boolean
+  assignedTo: UserRelateToManyInput
+}
+
+input RolesCreateInput {
+  data: RoleCreateInput
 }
 
 input UserRelateToOneInput {
@@ -881,6 +1010,24 @@ type Mutation {
   """ Delete multiple User items by ID. """
   deleteUsers(ids: [ID!]): [User]
 
+  """ Create a single Role item. """
+  createRole(data: RoleCreateInput): Role
+
+  """ Create multiple Role items. """
+  createRoles(data: [RolesCreateInput]): [Role]
+
+  """ Update a single Role item by ID. """
+  updateRole(id: ID!, data: RoleUpdateInput): Role
+
+  """ Update multiple Role items by ID. """
+  updateRoles(data: [RolesUpdateInput]): [Role]
+
+  """ Delete a single Role item by ID. """
+  deleteRole(id: ID!): Role
+
+  """ Delete multiple Role items by ID. """
+  deleteRoles(ids: [ID!]): [Role]
+
   """ Create a single Wine item. """
   createWine(data: WineCreateInput): Wine
 
@@ -964,6 +1111,18 @@ type Query {
 
   """ Retrieve the meta-data for the User list. """
   _UsersMeta: _ListMeta
+
+  """ Search for all Role items which match the where clause. """
+  allRoles(where: RoleWhereInput, search: String, sortBy: [SortRolesBy!], orderBy: String, first: Int, skip: Int): [Role]
+
+  """ Search for the Role item with the matching ID. """
+  Role(where: RoleWhereUniqueInput!): Role
+
+  """ Perform a meta-query on all Role items which match the where clause. """
+  _allRolesMeta(where: RoleWhereInput, search: String, sortBy: [SortRolesBy!], orderBy: String, first: Int, skip: Int): _QueryMeta
+
+  """ Retrieve the meta-data for the Role list. """
+  _RolesMeta: _ListMeta
 
   """ Search for all Wine items which match the where clause. """
   allWines(where: WineWhereInput, search: String, sortBy: [SortWinesBy!], orderBy: String, first: Int, skip: Int): [Wine]
