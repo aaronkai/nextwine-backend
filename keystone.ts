@@ -51,7 +51,7 @@ if (process.env.NODE_ENV === "production") {
 }
 
 console.log(`node env is: ${process.env.NODE_ENV}`);
-console.log(`connecting to DB ${dbURL}`);
+console.log(`database is: ${frontendURL}`);
 console.log(`Allowing connections from ${frontendURL}`);
 
 const sessionConfig = {
@@ -70,7 +70,7 @@ export default auth.withAuth(
     },
     db: {
       adapter: process.env.POSTGRES_ADAPTER,
-      url: dbURL
+      url: dbURL,
       async onConnect(keystone){
         console.log('Connected to the database')
         if(process.argv.includes('--seed-data')) {
